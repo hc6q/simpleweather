@@ -68,9 +68,17 @@ Há previews de nublado, chuva, sol, noite e dos dois widgets. `VisualReviewTest
 
 No iPhone, confira também VoiceOver, Reduzir Movimento, localização negada, modo avião com/sem cache e a troca de unidade refletida nos widgets. O App Icon está em `Assets.xcassets`, com o desenho vetorial editável em `Config/AppIcon.svg`.
 
-## Release e IPA futuro
+## IPA sem assinatura para iPhone
 
-O scheme tem Archive em Release e o projeto está preparado para assinatura, mas não há workflow que publica versões automaticamente. Para gerar um IPA, será necessário configurar archive/export com os dois provisioning profiles, certificado e secrets no GitHub. TestFlight requer a configuração correspondente no App Store Connect. Nunca adicione `.p12`, `.p8`, `.mobileprovision`, senhas ou tokens ao Git; esses arquivos estão no `.gitignore`.
+O workflow manual [iOS Unsigned IPA](https://github.com/hc6q/simpleweather/actions/workflows/ios-unsigned-ipa.yml) usa o projeto e o scheme atuais. Compila em **Release**, com `-sdk iphoneos`, destino `generic/platform=iOS` e arquitetura `arm64`. A assinatura é desativada com `CODE_SIGNING_ALLOWED=NO` e `CODE_SIGNING_REQUIRED=NO`; Automatic Signing não é usado nessa execução.
+
+1. Abra **Actions → iOS Unsigned IPA → Run workflow**, na branch `main`.
+2. Quando terminar, baixe o artifact **SimpleWeather-Unsigned-iPhone**.
+3. Extraia **SimpleWeather-Unsigned.ipa** do ZIP do artifact e importe no **Feather**, onde a assinatura será feita posteriormente.
+
+O IPA contém `Payload/SimpleWeather.app` e a extensão `PlugIns/WeatherWidgets.appex`. O workflow abre o IPA final e verifica o SDK `iphoneos`, a plataforma Mach-O `IOS`, a arquitetura `arm64` do app e do widget, as permissões dos executáveis e a ausência de assinatura. Os logs e o resumo da execução registram essas verificações e o SHA-256 do IPA.
+
+Apenas o nome da pasta externa do app muda no pacote; identificadores, executáveis, interface, frameworks e arquivos de entitlements do projeto são preservados. O GitHub apenas compila e empacota: não utiliza certificado, senha, provisioning profile, conta Apple ou secrets de assinatura. Esse workflow não faz upload para TestFlight nem assina o aplicativo.
 
 ## Organização
 

@@ -1,0 +1,180 @@
+name: iOS Unsigned IPA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-unsigned-ipa-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  unsigned-iphone:
+    name: Release arm64 IPA without signing
+    runs-on: macos-15
+    timeout-minutes: 25
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inspect Xcode, iPhone SDK and existing project
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-path
+          xcrun --sdk iphoneos --show-sdk-version
+          python3 scripts/validate_project.py
+
+      - name: Build Release for physical iPhone without signing
+        run: |
+          set -euo pipefail
+          mkdir -p build/UnsignedIPA
+          xcodebuild \
+            -project WeatherApp.xcodeproj \
+            -scheme WeatherApp \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build/UnsignedIPA/DerivedData \
+            ARCHS=arm64 \
+            ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY= \
+            build 2>&1 | tee build/UnsignedIPA/build.log
+
+      - name: Package the device app and its embedded widget
+        run: |
+          set -euo pipefail
+          device_app=build/UnsignedIPA/DerivedData/Build/Products/Release-iphoneos/WeatherApp.app
+          test -d "$device_app/PlugIns/WeatherWidgets.appex"
+          mkdir -p build/UnsignedIPA/staging/Payload
+          # Only the outer bundle directory is renamed. Executable names,
+          # identifiers, resources and embedded extensions stay unchanged.
+          ditto "$device_app" build/UnsignedIPA/staging/Payload/SimpleWeather.app
+          ditto -c -k --norsrc --keepParent \
+            build/UnsignedIPA/staging/Payload \
+            build/UnsignedIPA/SimpleWeather-Unsigned.ipa
+
+      - name: Validate the final IPA, device platform and arm64 binaries
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | tee build/UnsignedIPA/validation.log
+          import hashlib
+          import os
+          from pathlib import Path
+          import plistlib
+          import re
+          import subprocess
+          import tempfile
+          import zipfile
+
+          def require(condition, message):
+              if not condition:
+                  raise SystemExit(message)
+
+          def command(*args):
+              return subprocess.check_output(args, text=True).strip()
+
+          ipa = Path("build/UnsignedIPA/SimpleWeather-Unsigned.ipa")
+          app = "Payload/SimpleWeather.app"
+          widget = f"{app}/PlugIns/WeatherWidgets.appex"
+          with zipfile.ZipFile(ipa) as archive, tempfile.TemporaryDirectory() as scratch:
+              require(archive.testzip() is None, "The IPA ZIP is corrupted.")
+              names = set(archive.namelist())
+              require(all(name.startswith("Payload/") for name in names),
+                      "The IPA must contain only the Payload directory.")
+              require(f"{widget}/Info.plist" in names,
+                      "The final IPA is missing the embedded Widget Extension.")
+              require(not any("_CodeSignature" in Path(name).parts or
+                              name.endswith(".mobileprovision") for name in names),
+                      "Unexpected signature or provisioning profile in the IPA.")
+
+              def validate_bundle(bundle, package_type):
+                  info = plistlib.loads(archive.read(f"{bundle}/Info.plist"))
+                  require(info.get("CFBundlePackageType") == package_type,
+                          f"Unexpected bundle type: {bundle}")
+                  require(info.get("DTPlatformName") == "iphoneos" and
+                          info.get("CFBundleSupportedPlatforms") == ["iPhoneOS"],
+                          f"Not a physical iPhone build: {bundle}")
+                  require(info.get("DTSDKName", "").startswith("iphoneos"),
+                          f"Incorrect SDK: {bundle}")
+                  executable = f"{bundle}/{info['CFBundleExecutable']}"
+                  require(executable in names, f"Missing executable: {executable}")
+                  mode = archive.getinfo(executable).external_attr >> 16
+                  require(mode & 0o111, f"Executable permissions lost: {executable}")
+                  binary = archive.extract(executable, scratch)
+                  architectures = command("xcrun", "lipo", "-archs", binary).split()
+                  require(architectures == ["arm64"],
+                          f"Expected arm64, found {architectures}: {executable}")
+                  subprocess.run(["xcrun", "lipo", "-verify_arch", "arm64", binary], check=True)
+                  build_info = command("xcrun", "vtool", "-show-build", binary)
+                  platforms = re.findall(r"^\s*platform\s+(\S+)", build_info, re.MULTILINE)
+                  require(platforms == ["IOS"],
+                          f"Expected Mach-O platform IOS, found {platforms}: {executable}")
+                  load_commands = command("xcrun", "otool", "-l", binary)
+                  require("LC_CODE_SIGNATURE" not in load_commands,
+                          f"Unexpected code signature: {executable}")
+                  print(f"Bundle: {bundle}")
+                  print(f"SDK: {info['DTSDKName']}; architecture: {' '.join(architectures)}; platform: IOS")
+                  print(command("file", binary))
+                  print(build_info)
+                  print("Code signature: absent")
+                  return info
+
+              app_info = validate_bundle(app, "APPL")
+              widget_info = validate_bundle(widget, "XPC!")
+              require(widget_info.get("NSExtension", {}).get("NSExtensionPointIdentifier") ==
+                      "com.apple.widgetkit-extension", "The extension is not a WidgetKit extension.")
+              require(widget_info["CFBundleIdentifier"].startswith(app_info["CFBundleIdentifier"] + "."),
+                      "The widget bundle identifier must be under the app identifier.")
+              require(widget_info.get("WeatherAppGroup") == app_info.get("WeatherAppGroup") and
+                      bool(app_info.get("WeatherAppGroup")), "App and widget App Groups disagree.")
+
+          digest = hashlib.sha256(ipa.read_bytes()).hexdigest()
+          print("Widget Extension present in final IPA: YES")
+          print(f"IPA: {ipa.name}")
+          print(f"SHA-256: {digest}")
+          summary = (
+              "## Unsigned iPhone IPA verified\n\n"
+              f"- Commit: `{os.environ['GITHUB_SHA']}`\n"
+              "- Project / scheme: `WeatherApp.xcodeproj` / `WeatherApp`\n"
+              f"- SDK: `{app_info['DTSDKName']}` (`-sdk iphoneos`)\n"
+              "- Configuration / destination: `Release` / `generic/platform=iOS`\n"
+              "- App and widget architecture: `arm64`; Mach-O platform: `IOS`\n"
+              "- Widget Extension present: **YES**\n"
+              f"- Widget path: `{widget}`\n"
+              "- Code signatures and provisioning profiles: **absent**\n"
+              f"- IPA: `{ipa.name}`\n"
+              "- Artifact: `SimpleWeather-Unsigned-iPhone`\n"
+              f"- SHA-256: `{digest}`\n\n"
+              "Signing is performed later in Feather.\n"
+          )
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as output:
+              output.write(summary)
+          PY
+
+      - name: Upload unsigned iPhone IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: SimpleWeather-Unsigned-iPhone
+          path: build/UnsignedIPA/SimpleWeather-Unsigned.ipa
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+      - name: Upload build and validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: SimpleWeather-Unsigned-Diagnostics
+          path: build/UnsignedIPA/*.log
+          if-no-files-found: warn
+          retention-days: 14
