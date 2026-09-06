@@ -72,9 +72,9 @@ struct WeatherDashboard: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
-                header.padding(.top, 12).padding(.bottom, 7)
+                header.padding(.top, 8).padding(.bottom, 3)
                 CurrentWeatherView(current: snapshot.current, unit: unit)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 6)
                 HourlyForecastView(snapshot: snapshot, unit: unit, now: now)
                 DailyForecastView(snapshot: snapshot, unit: unit, now: now)
                 if snapshot.isStale(at: now) || notice != nil || permissionDenied {

@@ -29,8 +29,9 @@ struct WeatherIcon: View {
                 Image(systemName: symbol)
                     .resizable().scaledToFit()
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(symbol.contains("sun") || symbol.contains("bolt") ? WeatherTheme.sun : WeatherTheme.secondary,
-                                     Color(white: 0.91), WeatherTheme.rain)
+                    .foregroundStyle(symbol.hasPrefix("sun.") ? WeatherTheme.sun : Color(white: 0.91),
+                                     symbol.contains("sun") || symbol.contains("bolt") ? WeatherTheme.sun : WeatherTheme.secondary,
+                                     WeatherTheme.rain)
             }
         }
         .frame(width: size, height: size)

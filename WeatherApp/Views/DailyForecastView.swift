@@ -20,7 +20,7 @@ struct DailyForecastView: View {
                 }
                 VStack(spacing: 0) {
                     ForEach(days) { day in
-                        dayRow(day).padding(.vertical, 12)
+                        dayRow(day).padding(.vertical, 10)
                         if day.id != days.last?.id {
                             Rectangle().fill(WeatherTheme.divider).frame(height: 0.75)
                         }

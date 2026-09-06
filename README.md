@@ -1,10 +1,12 @@
 # Weather App
 
+[![iOS Build](https://github.com/hc6q/simpleweather/actions/workflows/ios-build.yml/badge.svg)](https://github.com/hc6q/simpleweather/actions/workflows/ios-build.yml)
+
 App iOS minimalista em preto OLED, com localização automática, previsão atual, próximas horas, quatro dias e widgets pequeno e médio. Interface em português do Brasil e inglês. Swift, SwiftUI, WeatherKit, CoreLocation, WidgetKit e async/await; iOS 17+. Sem dependências externas no app.
 
-## Status da entrega
+## Validação
 
-Projeto, serviços, interface, widgets, testes e workflow preparados. **Compilação e revisão visual no Simulator ainda precisam ser confirmadas pelo GitHub Actions.** Este arquivo não afirma que o CI passou. Consulte a execução vinculada ao último commit no repositório de destino.
+O [GitHub Actions](https://github.com/hc6q/simpleweather/actions/workflows/ios-build.yml) compila o app e os widgets em Debug e Release e executa 14 testes offline. O status acima acompanha a branch `main`; cada execução mantém os logs, os resultados dos testes e as imagens das interfaces.
 
 ## Build automático
 
@@ -62,7 +64,7 @@ O CI sem assinatura valida código e integração dos targets, mas não comprova
 
 As três interfaces são SwiftUI real: preto `#000000`, cards `#060606`, bordas discretas, fonte do sistema e ícones SF Symbols com acabamento em cinza, amarelo e ciano. O desenho dos símbolos nativos pode diferir dos ícones tridimensionais das referências.
 
-Há previews de nublado, chuva, sol, noite e dos dois widgets. `VisualReviewTests` renderiza a tela nas larguras 375, 390 e 430 pt, os widgets 170×170 / 364×170 e uma variante com Dynamic Type de acessibilidade. As imagens são exportadas no artefato `WeatherApp-VisualReview`; compare-as com as três referências antes de considerar a revisão visual concluída. São renderizações SwiftUI para revisão de layout, não capturas da tela de início do iOS.
+Há previews de nublado, chuva, sol, noite e dos dois widgets. `VisualReviewTests` usa uma janela com `UIHostingController` no Simulator para capturar a tela nas larguras 375, 390 e 430 pt, os widgets 170×170 / 364×170 e uma variante com Dynamic Type de acessibilidade. O teste também rejeita capturas vazias. As imagens são exportadas no artefato `WeatherApp-VisualReview`. São capturas das interfaces com fixtures de teste, não capturas dos widgets instalados na tela de início do iOS.
 
 No iPhone, confira também VoiceOver, Reduzir Movimento, localização negada, modo avião com/sem cache e a troca de unidade refletida nos widgets. O App Icon está em `Assets.xcassets`, com o desenho vetorial editável em `Config/AppIcon.svg`.
 
