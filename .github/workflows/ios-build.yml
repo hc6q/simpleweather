@@ -1,0 +1,120 @@
+name: iOS Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: App, widgets and tests
+    runs-on: macos-15
+    timeout-minutes: 35
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inspect Xcode and shared schemes
+        run: |
+          xcodebuild -version
+          xcodebuild -list -project WeatherApp.xcodeproj
+          xcrun simctl list runtimes
+
+      - name: Verify project structure
+        run: python3 scripts/validate_project.py
+
+      - name: Build app and embedded widgets without signing
+        shell: bash
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project WeatherApp.xcodeproj \
+            -scheme WeatherApp \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build 2>&1 | tee build.log
+
+      - name: Select an available iPhone simulator
+        id: simulator
+        run: python3 scripts/select_simulator.py
+
+      - name: Run offline unit and visual render tests
+        shell: bash
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project WeatherApp.xcodeproj \
+            -scheme WeatherApp \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,id=${{ steps.simulator.outputs.udid }}' \
+            -destination-timeout 120 \
+            -derivedDataPath DerivedData \
+            -resultBundlePath TestResults.xcresult \
+            -parallel-testing-enabled NO \
+            CODE_SIGNING_ALLOWED=NO \
+            test 2>&1 | tee test.log
+
+      - name: Compile production configuration
+        shell: bash
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project WeatherApp.xcodeproj \
+            -scheme WeatherApp \
+            -configuration Release \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee release-build.log
+
+      - name: Export visual review images
+        run: |
+          mkdir -p VisualReview
+          xcrun xcresulttool export attachments --path TestResults.xcresult --output-path VisualReview
+
+      - name: Package Simulator app
+        run: |
+          mkdir -p artifacts
+          ditto -c -k --sequesterRsrc --keepParent \
+            DerivedData/Build/Products/Release-iphonesimulator/WeatherApp.app \
+            artifacts/WeatherApp-Simulator.zip
+
+      - name: Upload Simulator app
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeatherApp-Simulator
+          path: artifacts/WeatherApp-Simulator.zip
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload visual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeatherApp-VisualReview
+          path: VisualReview/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload logs and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeatherApp-Diagnostics
+          path: |
+            *.log
+            TestResults.xcresult
+          if-no-files-found: warn
+          retention-days: 14

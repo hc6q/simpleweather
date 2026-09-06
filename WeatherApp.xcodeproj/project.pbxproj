@@ -1,0 +1,1159 @@
+// !$*UTF8*$!
+{
+	"archiveVersion" = 1;
+	"classes" = {
+	};
+	"objectVersion" = 56;
+	"objects" = {
+		"05B338DEC70CD4022B3178BF" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/Components/WeatherIcon.swift";
+			"sourceTree" = "<group>";
+		};
+		"060CF10590BAB59DF78165DE" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/Components/WeatherTheme.swift";
+			"sourceTree" = "<group>";
+		};
+		"9AA58D70EF529EB35577B365" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/Components/WeatherWidgetViews.swift";
+			"sourceTree" = "<group>";
+		};
+		"40A6D085E64CC29DE19DFB29" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/Models/WeatherConditionModel.swift";
+			"sourceTree" = "<group>";
+		};
+		"6D5332B07B002ADD3418B939" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/Models/WeatherSnapshot.swift";
+			"sourceTree" = "<group>";
+		};
+		"F0520B14950233227CB9401D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/PreviewContent/PreviewWeather.swift";
+			"sourceTree" = "<group>";
+		};
+		"DC6ED694FA5CE544EBF35DF9" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/Services/WeatherCache.swift";
+			"sourceTree" = "<group>";
+		};
+		"06D697199CE97C90E855E3E3" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/Services/WeatherClient.swift";
+			"sourceTree" = "<group>";
+		};
+		"238DC8E6F4E20E001B7B7400" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/WeatherFormatting.swift";
+			"sourceTree" = "<group>";
+		};
+		"0CFD746EC8CFAF0EB1D38B5F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/App/WeatherApp.swift";
+			"sourceTree" = "<group>";
+		};
+		"86E2A00FCB8FB7873ABF8356" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Services/GeocodingService.swift";
+			"sourceTree" = "<group>";
+		};
+		"DD68EC14683DE7CF6FF4D236" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Services/LocationService.swift";
+			"sourceTree" = "<group>";
+		};
+		"D962081F14B315D6EF5F11AD" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/ViewModels/WeatherViewModel.swift";
+			"sourceTree" = "<group>";
+		};
+		"C9F71617045F3298EDC2D797" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Views/CurrentWeatherView.swift";
+			"sourceTree" = "<group>";
+		};
+		"623CD65AD75C92B1D59799EA" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Views/DailyForecastView.swift";
+			"sourceTree" = "<group>";
+		};
+		"61D6AE3A42A18A93C55DB364" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Views/HourlyForecastView.swift";
+			"sourceTree" = "<group>";
+		};
+		"0EF04A185447F8196E2F227B" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Views/SettingsView.swift";
+			"sourceTree" = "<group>";
+		};
+		"536C0D97493EE38D750B309F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Views/WeatherAttributionView.swift";
+			"sourceTree" = "<group>";
+		};
+		"ED5D0A4F108DFAA95DDF7F1A" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Views/WeatherHomeView.swift";
+			"sourceTree" = "<group>";
+		};
+		"7245B586D84E1AD4E483386C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherApp/Views/WeatherPreviews.swift";
+			"sourceTree" = "<group>";
+		};
+		"89F11AE338217E6A8D0E4A5F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherWidgets/MediumWeatherWidget.swift";
+			"sourceTree" = "<group>";
+		};
+		"FBC4AFA4EF64A99D4BD800BF" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherWidgets/SmallWeatherWidget.swift";
+			"sourceTree" = "<group>";
+		};
+		"CD26023E62D5ACB91C9E5784" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherWidgets/WeatherTimelineProvider.swift";
+			"sourceTree" = "<group>";
+		};
+		"EE0D3693C2248E0DD164A96F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherWidgets/WeatherWidgetBundle.swift";
+			"sourceTree" = "<group>";
+		};
+		"C31C0D14C505076A3B3450DD" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherAppTests/VisualReviewTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"8ED0BA4C71D948F31D2F0282" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherAppTests/WeatherCacheTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"848647F9E301FBA0AAD00F30" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "WeatherAppTests/WeatherModelTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"4FD51BE9EDAD3EE6772988FE" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.json.xcstrings";
+			"path" = "Shared/Resources/Localizable.xcstrings";
+			"sourceTree" = "<group>";
+		};
+		"551FE9877DFDA3DB85C28092" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xml";
+			"path" = "Shared/Resources/PrivacyInfo.xcprivacy";
+			"sourceTree" = "<group>";
+		};
+		"13301865A6DEE6C970C0090C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder.assetcatalog";
+			"path" = "WeatherApp/Assets.xcassets";
+			"sourceTree" = "<group>";
+		};
+		"863E659805EAEF9EF6ED0019" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.strings";
+			"name" = "en";
+			"path" = "WeatherApp/Resources/en.lproj/InfoPlist.strings";
+			"sourceTree" = "<group>";
+		};
+		"93CFE74485F9461289E78597" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.strings";
+			"name" = "pt-BR";
+			"path" = "WeatherApp/Resources/pt-BR.lproj/InfoPlist.strings";
+			"sourceTree" = "<group>";
+		};
+		"6272F142E862102DF992CE6A" = {
+			"isa" = "PBXVariantGroup";
+			"children" = (
+				"863E659805EAEF9EF6ED0019",
+				"93CFE74485F9461289E78597",
+			);
+			"name" = "InfoPlist.strings";
+			"sourceTree" = "<group>";
+		};
+		"5DDDD65D45417BB4DA58A17F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xcconfig";
+			"path" = "Config/Project.xcconfig";
+			"sourceTree" = "<group>";
+		};
+		"79A206A709ECEBEB92A91930" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xml";
+			"path" = "Config/AppIcon.svg";
+			"sourceTree" = "<group>";
+		};
+		"AA4ACA445B3FBAF47CDE31AC" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "net.daringfireball.markdown";
+			"path" = "README.md";
+			"sourceTree" = "<group>";
+		};
+		"AEF866A43C0FA71B3410B547" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "WeatherApp/Info.plist";
+			"sourceTree" = "<group>";
+		};
+		"42E67043B30595A5069D6867" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"path" = "WeatherApp/WeatherApp.entitlements";
+			"sourceTree" = "<group>";
+		};
+		"77E6068754CAC6AF08C43D09" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "WeatherWidgets/Info.plist";
+			"sourceTree" = "<group>";
+		};
+		"92084BBCCF7EA2244C1174A1" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"path" = "WeatherWidgets/WeatherWidgets.entitlements";
+			"sourceTree" = "<group>";
+		};
+		"962202594ADF5F712374C84B" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"includeInIndex" = 0;
+			"path" = "WeatherApp.app";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"62E14FFE0BCD6FBEE35B5DCF" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.app-extension";
+			"includeInIndex" = 0;
+			"path" = "WeatherWidgets.appex";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"18320FF8EE8BE73AAF0B5743" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "WeatherAppTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"12A4B3D6AC4FAB9D19A11202" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "SwiftUI.framework";
+			"path" = "System/Library/Frameworks/SwiftUI.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"40DCD14CE876152321C26156" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "WeatherKit.framework";
+			"path" = "System/Library/Frameworks/WeatherKit.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"B6689DE65284BA08EE8138E5" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "CoreLocation.framework";
+			"path" = "System/Library/Frameworks/CoreLocation.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"826B0517F094852F30BAF771" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "WidgetKit.framework";
+			"path" = "System/Library/Frameworks/WidgetKit.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"C098C21FBE6D592AC5E723AB" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "Foundation.framework";
+			"path" = "System/Library/Frameworks/Foundation.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"4679B1B8479DBB4E59EA933C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "wrapper.framework";
+			"name" = "UIKit.framework";
+			"path" = "System/Library/Frameworks/UIKit.framework";
+			"sourceTree" = "SDKROOT";
+		};
+		"44C7E229889FE9D1BB841A79" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"05B338DEC70CD4022B3178BF",
+				"060CF10590BAB59DF78165DE",
+				"9AA58D70EF529EB35577B365",
+				"40A6D085E64CC29DE19DFB29",
+				"6D5332B07B002ADD3418B939",
+				"F0520B14950233227CB9401D",
+				"DC6ED694FA5CE544EBF35DF9",
+				"06D697199CE97C90E855E3E3",
+				"238DC8E6F4E20E001B7B7400",
+			);
+			"name" = "Shared";
+			"sourceTree" = "<group>";
+		};
+		"67DC645101C62DDD305DB728" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"0CFD746EC8CFAF0EB1D38B5F",
+				"86E2A00FCB8FB7873ABF8356",
+				"DD68EC14683DE7CF6FF4D236",
+				"D962081F14B315D6EF5F11AD",
+				"C9F71617045F3298EDC2D797",
+				"623CD65AD75C92B1D59799EA",
+				"61D6AE3A42A18A93C55DB364",
+				"0EF04A185447F8196E2F227B",
+				"536C0D97493EE38D750B309F",
+				"ED5D0A4F108DFAA95DDF7F1A",
+				"7245B586D84E1AD4E483386C",
+			);
+			"name" = "WeatherApp";
+			"sourceTree" = "<group>";
+		};
+		"411E1339EE28718EBE59AD2C" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"89F11AE338217E6A8D0E4A5F",
+				"FBC4AFA4EF64A99D4BD800BF",
+				"CD26023E62D5ACB91C9E5784",
+				"EE0D3693C2248E0DD164A96F",
+			);
+			"name" = "WeatherWidgets";
+			"sourceTree" = "<group>";
+		};
+		"E0E15DBF5017EDD0AD15F3C4" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"C31C0D14C505076A3B3450DD",
+				"8ED0BA4C71D948F31D2F0282",
+				"848647F9E301FBA0AAD00F30",
+			);
+			"name" = "WeatherAppTests";
+			"sourceTree" = "<group>";
+		};
+		"A024F06580C79B7582C3806A" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"4FD51BE9EDAD3EE6772988FE",
+				"551FE9877DFDA3DB85C28092",
+				"13301865A6DEE6C970C0090C",
+				"6272F142E862102DF992CE6A",
+			);
+			"name" = "Resources";
+			"sourceTree" = "<group>";
+		};
+		"C23108729D1809B8323E9806" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"5DDDD65D45417BB4DA58A17F",
+				"79A206A709ECEBEB92A91930",
+				"AA4ACA445B3FBAF47CDE31AC",
+				"AEF866A43C0FA71B3410B547",
+				"42E67043B30595A5069D6867",
+				"77E6068754CAC6AF08C43D09",
+				"92084BBCCF7EA2244C1174A1",
+			);
+			"name" = "Configuration";
+			"sourceTree" = "<group>";
+		};
+		"2D17C89EB2C5B87E8B0EC3B6" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"12A4B3D6AC4FAB9D19A11202",
+				"40DCD14CE876152321C26156",
+				"B6689DE65284BA08EE8138E5",
+				"826B0517F094852F30BAF771",
+				"C098C21FBE6D592AC5E723AB",
+				"4679B1B8479DBB4E59EA933C",
+			);
+			"name" = "Frameworks";
+			"sourceTree" = "<group>";
+		};
+		"5151B46607EBC8890D8DFCC2" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"962202594ADF5F712374C84B",
+				"62E14FFE0BCD6FBEE35B5DCF",
+				"18320FF8EE8BE73AAF0B5743",
+			);
+			"name" = "Products";
+			"sourceTree" = "<group>";
+		};
+		"514FD8379F3D5B871ED7905C" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"44C7E229889FE9D1BB841A79",
+				"67DC645101C62DDD305DB728",
+				"411E1339EE28718EBE59AD2C",
+				"E0E15DBF5017EDD0AD15F3C4",
+				"A024F06580C79B7582C3806A",
+				"C23108729D1809B8323E9806",
+				"2D17C89EB2C5B87E8B0EC3B6",
+				"5151B46607EBC8890D8DFCC2",
+			);
+			"sourceTree" = "<group>";
+		};
+		"877A6BA951A2EA0025A2ABE8" = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"buildSettings" = {
+				"ALWAYS_SEARCH_USER_PATHS" = "NO";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"CLANG_WARN_UNREACHABLE_CODE" = "YES";
+				"ENABLE_STRICT_OBJC_MSGSEND" = "YES";
+				"GCC_C_LANGUAGE_STANDARD" = "gnu17";
+				"GCC_NO_COMMON_BLOCKS" = "YES";
+				"GCC_WARN_64_TO_32_BIT_CONVERSION" = "YES";
+				"GCC_WARN_UNDECLARED_SELECTOR" = "YES";
+				"GCC_WARN_UNINITIALIZED_AUTOS" = "YES_AGGRESSIVE";
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"STRING_CATALOG_GENERATE_SYMBOLS" = "NO";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ONLY_ACTIVE_ARCH" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited) DEBUG";
+				"GCC_PREPROCESSOR_DEFINITIONS" = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				"ENABLE_TESTABILITY" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"959134B361DD7E21ADEA3164" = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"buildSettings" = {
+				"ALWAYS_SEARCH_USER_PATHS" = "NO";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"CLANG_WARN_UNREACHABLE_CODE" = "YES";
+				"ENABLE_STRICT_OBJC_MSGSEND" = "YES";
+				"GCC_C_LANGUAGE_STANDARD" = "gnu17";
+				"GCC_NO_COMMON_BLOCKS" = "YES";
+				"GCC_WARN_64_TO_32_BIT_CONVERSION" = "YES";
+				"GCC_WARN_UNDECLARED_SELECTOR" = "YES";
+				"GCC_WARN_UNINITIALIZED_AUTOS" = "YES_AGGRESSIVE";
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"STRING_CATALOG_GENERATE_SYMBOLS" = "NO";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ONLY_ACTIVE_ARCH" = "NO";
+				"SWIFT_COMPILATION_MODE" = "wholemodule";
+				"VALIDATE_PRODUCT" = "YES";
+			};
+			"name" = "Release";
+		};
+		"247BF104A9AD002C539DA531" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"877A6BA951A2EA0025A2ABE8",
+				"959134B361DD7E21ADEA3164",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"C1B455018A05415EE27DB3BB" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "05B338DEC70CD4022B3178BF";
+		};
+		"5C4ECDA5AD88B1CD8A3DA2D0" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "060CF10590BAB59DF78165DE";
+		};
+		"5D48C5C7D1B005BDF5F5F960" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "9AA58D70EF529EB35577B365";
+		};
+		"7B947D808157385B5641EE39" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "40A6D085E64CC29DE19DFB29";
+		};
+		"2B1E48DC367C5F370AD0DE03" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6D5332B07B002ADD3418B939";
+		};
+		"84AB73D9DDA106B10B238E50" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F0520B14950233227CB9401D";
+		};
+		"1B120C070ED91F7171CDB69A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DC6ED694FA5CE544EBF35DF9";
+		};
+		"1E90ECB7E779E235C3B27A67" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "06D697199CE97C90E855E3E3";
+		};
+		"54E91EA96169FC021DC06135" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "238DC8E6F4E20E001B7B7400";
+		};
+		"603DBE9324F86C75891969F2" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "0CFD746EC8CFAF0EB1D38B5F";
+		};
+		"DED09AF0995CEF59A9C6188B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "86E2A00FCB8FB7873ABF8356";
+		};
+		"0F1BC673EDE2DA8DA62D35B7" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DD68EC14683DE7CF6FF4D236";
+		};
+		"C828847376905DDDD7D3CB79" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D962081F14B315D6EF5F11AD";
+		};
+		"EBE1902F62D86EEF90EEBBA1" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C9F71617045F3298EDC2D797";
+		};
+		"6DAFB35D87B114B1821BC1BE" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "623CD65AD75C92B1D59799EA";
+		};
+		"26F5978CC031F9B9E2F541CC" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "61D6AE3A42A18A93C55DB364";
+		};
+		"9C84276A14E93CD05BC95F41" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "0EF04A185447F8196E2F227B";
+		};
+		"93D7D7066A6440759AE73184" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "536C0D97493EE38D750B309F";
+		};
+		"86E291C778A12A35D4C26365" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "ED5D0A4F108DFAA95DDF7F1A";
+		};
+		"B0E3143C938638705F76A990" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "7245B586D84E1AD4E483386C";
+		};
+		"A586CEACA4EF70929DFF3D57" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"C1B455018A05415EE27DB3BB",
+				"5C4ECDA5AD88B1CD8A3DA2D0",
+				"5D48C5C7D1B005BDF5F5F960",
+				"7B947D808157385B5641EE39",
+				"2B1E48DC367C5F370AD0DE03",
+				"84AB73D9DDA106B10B238E50",
+				"1B120C070ED91F7171CDB69A",
+				"1E90ECB7E779E235C3B27A67",
+				"54E91EA96169FC021DC06135",
+				"603DBE9324F86C75891969F2",
+				"DED09AF0995CEF59A9C6188B",
+				"0F1BC673EDE2DA8DA62D35B7",
+				"C828847376905DDDD7D3CB79",
+				"EBE1902F62D86EEF90EEBBA1",
+				"6DAFB35D87B114B1821BC1BE",
+				"26F5978CC031F9B9E2F541CC",
+				"9C84276A14E93CD05BC95F41",
+				"93D7D7066A6440759AE73184",
+				"86E291C778A12A35D4C26365",
+				"B0E3143C938638705F76A990",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"61E2EE1AC6AB0659942A6CAE" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "12A4B3D6AC4FAB9D19A11202";
+		};
+		"1FBA94356347BC76530380BD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "40DCD14CE876152321C26156";
+		};
+		"8163B9E65531DF072B789773" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B6689DE65284BA08EE8138E5";
+		};
+		"6DE05E2B5B861B6D81EBF031" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "826B0517F094852F30BAF771";
+		};
+		"8B2ED3CA247446AAFFE74D3C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C098C21FBE6D592AC5E723AB";
+		};
+		"B258543BADC7C5D1F98237B1" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4679B1B8479DBB4E59EA933C";
+		};
+		"A90A96223F924CCBEC9A9B35" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"61E2EE1AC6AB0659942A6CAE",
+				"1FBA94356347BC76530380BD",
+				"8163B9E65531DF072B789773",
+				"6DE05E2B5B861B6D81EBF031",
+				"8B2ED3CA247446AAFFE74D3C",
+				"B258543BADC7C5D1F98237B1",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"9AA492C774FABA31F91FC089" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4FD51BE9EDAD3EE6772988FE";
+		};
+		"156CD16A9D7F4839DBD4593C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "551FE9877DFDA3DB85C28092";
+		};
+		"D542B60BCB07C025A8EEA350" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "13301865A6DEE6C970C0090C";
+		};
+		"6F2E5A18CA29D8BB0B451F81" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6272F142E862102DF992CE6A";
+		};
+		"47C530A36ED2AB9E6B9F33FE" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"9AA492C774FABA31F91FC089",
+				"156CD16A9D7F4839DBD4593C",
+				"D542B60BCB07C025A8EEA350",
+				"6F2E5A18CA29D8BB0B451F81",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"4FD56C71B805A1A86B8204D1" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "2D1FC3BAC0790CBF96EFEF68";
+			"remoteInfo" = "WeatherWidgets";
+		};
+		"858F9FBF48724CA2BE664416" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "2D1FC3BAC0790CBF96EFEF68";
+			"targetProxy" = "4FD56C71B805A1A86B8204D1";
+		};
+		"FE13FC228FE0F6FB9BDD7744" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "62E14FFE0BCD6FBEE35B5DCF";
+			"settings" = {
+				"ATTRIBUTES" = (
+					"RemoveHeadersOnCopy",
+				);
+			};
+		};
+		"4B5C49B62512474C57B10522" = {
+			"isa" = "PBXCopyFilesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"dstPath" = "";
+			"dstSubfolderSpec" = 13;
+			"files" = (
+				"FE13FC228FE0F6FB9BDD7744",
+			);
+			"name" = "Embed App Extensions";
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"39938BE2993F488D559F5242" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"SWIFT_VERSION" = "5.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "WeatherApp/Info.plist";
+				"CODE_SIGN_ENTITLEMENTS" = "WeatherApp/WeatherApp.entitlements";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(APP_BUNDLE_IDENTIFIER)";
+				"SWIFT_INSTALL_OBJC_HEADER" = "NO";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"SKIP_INSTALL" = "NO";
+			};
+			"name" = "Debug";
+		};
+		"4062B3983C97859C5142DC7D" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"SWIFT_VERSION" = "5.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "WeatherApp/Info.plist";
+				"CODE_SIGN_ENTITLEMENTS" = "WeatherApp/WeatherApp.entitlements";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(APP_BUNDLE_IDENTIFIER)";
+				"SWIFT_INSTALL_OBJC_HEADER" = "NO";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"SKIP_INSTALL" = "NO";
+			};
+			"name" = "Release";
+		};
+		"02C95B20E676C49B83A98F21" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"39938BE2993F488D559F5242",
+				"4062B3983C97859C5142DC7D",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"045E5694C16A4FB5AAF9A73E" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "02C95B20E676C49B83A98F21";
+			"buildPhases" = (
+				"A586CEACA4EF70929DFF3D57",
+				"A90A96223F924CCBEC9A9B35",
+				"47C530A36ED2AB9E6B9F33FE",
+				"4B5C49B62512474C57B10522",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"858F9FBF48724CA2BE664416",
+			);
+			"name" = "WeatherApp";
+			"productName" = "WeatherApp";
+			"productReference" = "962202594ADF5F712374C84B";
+			"productType" = "com.apple.product-type.application";
+		};
+		"BA6E315783F1B0C9C8D0039E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "05B338DEC70CD4022B3178BF";
+		};
+		"95C0C9F2A9D5B8D39268415B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "060CF10590BAB59DF78165DE";
+		};
+		"7522DC10A6802B4936458BE0" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "9AA58D70EF529EB35577B365";
+		};
+		"444DCB726388A8699E1A3621" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "40A6D085E64CC29DE19DFB29";
+		};
+		"DD0A4502F4DBDAF37260761C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6D5332B07B002ADD3418B939";
+		};
+		"107E119DE13AF10DB539988A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F0520B14950233227CB9401D";
+		};
+		"99F09949082380A1DB0C95D3" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DC6ED694FA5CE544EBF35DF9";
+		};
+		"33B9E0E3E6C3A5A8DC5EAC34" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "06D697199CE97C90E855E3E3";
+		};
+		"30DC115143C60CC693ED06D4" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "238DC8E6F4E20E001B7B7400";
+		};
+		"42DC3142E43A731AF3758B6C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "89F11AE338217E6A8D0E4A5F";
+		};
+		"C0EA1913F0EB9495DF5EC6F2" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "FBC4AFA4EF64A99D4BD800BF";
+		};
+		"348CBF93875ABE5483691169" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CD26023E62D5ACB91C9E5784";
+		};
+		"B8BB806D58E4459F308F9553" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "EE0D3693C2248E0DD164A96F";
+		};
+		"B1A3AEDF54591169EAFB6E78" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"BA6E315783F1B0C9C8D0039E",
+				"95C0C9F2A9D5B8D39268415B",
+				"7522DC10A6802B4936458BE0",
+				"444DCB726388A8699E1A3621",
+				"DD0A4502F4DBDAF37260761C",
+				"107E119DE13AF10DB539988A",
+				"99F09949082380A1DB0C95D3",
+				"33B9E0E3E6C3A5A8DC5EAC34",
+				"30DC115143C60CC693ED06D4",
+				"42DC3142E43A731AF3758B6C",
+				"C0EA1913F0EB9495DF5EC6F2",
+				"348CBF93875ABE5483691169",
+				"B8BB806D58E4459F308F9553",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"BE323A340CD31D7B33F54CDC" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "12A4B3D6AC4FAB9D19A11202";
+		};
+		"DFDA861FD4BE9ADE4A9C8985" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "40DCD14CE876152321C26156";
+		};
+		"FEA4BFF8ED8AF65D3829B442" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B6689DE65284BA08EE8138E5";
+		};
+		"8DCDD93CB1DF10C9CA80DA13" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "826B0517F094852F30BAF771";
+		};
+		"D6F9F17168929939271C06C8" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C098C21FBE6D592AC5E723AB";
+		};
+		"8FF8EA66617FCFBCD6909D6A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4679B1B8479DBB4E59EA933C";
+		};
+		"B2915EBE1A9780AF88A8BB87" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"BE323A340CD31D7B33F54CDC",
+				"DFDA861FD4BE9ADE4A9C8985",
+				"FEA4BFF8ED8AF65D3829B442",
+				"8DCDD93CB1DF10C9CA80DA13",
+				"D6F9F17168929939271C06C8",
+				"8FF8EA66617FCFBCD6909D6A",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"13F025363CB78F4B92D3BEB5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4FD51BE9EDAD3EE6772988FE";
+		};
+		"2A14515225CFE48EF10983B1" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "551FE9877DFDA3DB85C28092";
+		};
+		"D257E633E1A25ABF73CD7CAE" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"13F025363CB78F4B92D3BEB5",
+				"2A14515225CFE48EF10983B1",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"7E870E7E8D71B14CB228BD15" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"SWIFT_VERSION" = "5.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "WeatherWidgets/Info.plist";
+				"CODE_SIGN_ENTITLEMENTS" = "WeatherWidgets/WeatherWidgets.entitlements";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(APP_BUNDLE_IDENTIFIER).widgets";
+				"SWIFT_INSTALL_OBJC_HEADER" = "NO";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"8452C8DBC3C359C8BB3036DF" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"SWIFT_VERSION" = "5.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "WeatherWidgets/Info.plist";
+				"CODE_SIGN_ENTITLEMENTS" = "WeatherWidgets/WeatherWidgets.entitlements";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(APP_BUNDLE_IDENTIFIER).widgets";
+				"SWIFT_INSTALL_OBJC_HEADER" = "NO";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "Release";
+		};
+		"60842FBA25D381BF7695A3C0" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"7E870E7E8D71B14CB228BD15",
+				"8452C8DBC3C359C8BB3036DF",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"2D1FC3BAC0790CBF96EFEF68" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "60842FBA25D381BF7695A3C0";
+			"buildPhases" = (
+				"B1A3AEDF54591169EAFB6E78",
+				"B2915EBE1A9780AF88A8BB87",
+				"D257E633E1A25ABF73CD7CAE",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+			);
+			"name" = "WeatherWidgets";
+			"productName" = "WeatherWidgets";
+			"productReference" = "62E14FFE0BCD6FBEE35B5DCF";
+			"productType" = "com.apple.product-type.app-extension";
+		};
+		"5EEA0DE8BE654F5A67BF3328" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C31C0D14C505076A3B3450DD";
+		};
+		"2C74F50C157BB82B756F33FE" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "8ED0BA4C71D948F31D2F0282";
+		};
+		"1C8CDDCE5483CDC0E011FB02" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "848647F9E301FBA0AAD00F30";
+		};
+		"566525905BCB76DFA9807E69" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"5EEA0DE8BE654F5A67BF3328",
+				"2C74F50C157BB82B756F33FE",
+				"1C8CDDCE5483CDC0E011FB02",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"25C4CA1CD8F5241C0F286E15" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "12A4B3D6AC4FAB9D19A11202";
+		};
+		"D5332BCBDBE8ED98036E9605" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "40DCD14CE876152321C26156";
+		};
+		"725ED79BA90FCCBB67139F64" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B6689DE65284BA08EE8138E5";
+		};
+		"C66A466501D46A205825038E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "826B0517F094852F30BAF771";
+		};
+		"CDD4F17403807EB38C148FAB" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C098C21FBE6D592AC5E723AB";
+		};
+		"DE35AF818E81F451D6743C4B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4679B1B8479DBB4E59EA933C";
+		};
+		"B55BF558C5B427AE6CA799BB" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"25C4CA1CD8F5241C0F286E15",
+				"D5332BCBDBE8ED98036E9605",
+				"725ED79BA90FCCBB67139F64",
+				"C66A466501D46A205825038E",
+				"CDD4F17403807EB38C148FAB",
+				"DE35AF818E81F451D6743C4B",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"E02405300FFD7CB32C4172AD" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"A8292CE0829ED2E94D181904" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "045E5694C16A4FB5AAF9A73E";
+			"remoteInfo" = "WeatherApp";
+		};
+		"20A2756378DCF95F2A043E18" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "045E5694C16A4FB5AAF9A73E";
+			"targetProxy" = "A8292CE0829ED2E94D181904";
+		};
+		"660D718875659F6C01BDC907" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"SWIFT_VERSION" = "5.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(APP_BUNDLE_IDENTIFIER).tests";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/WeatherApp.app/WeatherApp";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+			};
+			"name" = "Debug";
+		};
+		"54D4B736E5D4E44CADDB0DAC" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"SWIFT_VERSION" = "5.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(APP_BUNDLE_IDENTIFIER).tests";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/WeatherApp.app/WeatherApp";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+			};
+			"name" = "Release";
+		};
+		"2B36B2FBE75C2C5ADA5BD9AA" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"660D718875659F6C01BDC907",
+				"54D4B736E5D4E44CADDB0DAC",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"42D2BADC31D37F3B187DA85C" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "2B36B2FBE75C2C5ADA5BD9AA";
+			"buildPhases" = (
+				"566525905BCB76DFA9807E69",
+				"B55BF558C5B427AE6CA799BB",
+				"E02405300FFD7CB32C4172AD",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"20A2756378DCF95F2A043E18",
+			);
+			"name" = "WeatherAppTests";
+			"productName" = "WeatherAppTests";
+			"productReference" = "18320FF8EE8BE73AAF0B5743";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+		};
+		"98F54143AB4E86B28C3AFEE0" = {
+			"isa" = "PBXProject";
+			"attributes" = {
+				"BuildIndependentTargetsInParallel" = "YES";
+				"LastUpgradeCheck" = "1640";
+				"TargetAttributes" = {
+					"045E5694C16A4FB5AAF9A73E" = {
+						"CreatedOnToolsVersion" = "16.4";
+						"SystemCapabilities" = {
+							"com.apple.WeatherKit" = {
+								"enabled" = 1;
+							};
+							"com.apple.ApplicationGroups.iOS" = {
+								"enabled" = 1;
+							};
+						};
+					};
+					"2D1FC3BAC0790CBF96EFEF68" = {
+						"CreatedOnToolsVersion" = "16.4";
+						"SystemCapabilities" = {
+							"com.apple.WeatherKit" = {
+								"enabled" = 1;
+							};
+							"com.apple.ApplicationGroups.iOS" = {
+								"enabled" = 1;
+							};
+						};
+					};
+					"42D2BADC31D37F3B187DA85C" = {
+						"CreatedOnToolsVersion" = "16.4";
+						"TestTargetID" = "045E5694C16A4FB5AAF9A73E";
+					};
+				};
+			};
+			"buildConfigurationList" = "247BF104A9AD002C539DA531";
+			"compatibilityVersion" = "Xcode 14.0";
+			"developmentRegion" = "en";
+			"hasScannedForEncodings" = 0;
+			"knownRegions" = (
+				"en",
+				"pt-BR",
+				"Base",
+			);
+			"mainGroup" = "514FD8379F3D5B871ED7905C";
+			"productRefGroup" = "5151B46607EBC8890D8DFCC2";
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"targets" = (
+				"045E5694C16A4FB5AAF9A73E",
+				"2D1FC3BAC0790CBF96EFEF68",
+				"42D2BADC31D37F3B187DA85C",
+			);
+		};
+	};
+	"rootObject" = "98F54143AB4E86B28C3AFEE0";
+}
