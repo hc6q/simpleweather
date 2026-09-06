@@ -21,6 +21,7 @@ struct WeatherHomeView: View {
                 .transition(.opacity)
             } else {
                 emptyState
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .overlay(alignment: .topTrailing) {
                         Button { showingSettings = true } label: {
                             Image(systemName: "ellipsis").font(.system(size: 19, weight: .semibold))
