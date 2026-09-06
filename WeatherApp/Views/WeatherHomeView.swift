@@ -21,17 +21,18 @@ struct WeatherHomeView: View {
                 .transition(.opacity)
             } else {
                 emptyState
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .overlay(alignment: .topTrailing) {
-                        Button { showingSettings = true } label: {
-                            Image(systemName: "ellipsis").font(.system(size: 19, weight: .semibold))
-                                .frame(width: 44, height: 44)
-                                .background(WeatherTheme.card, in: Circle())
-                                .overlay { Circle().strokeBorder(WeatherTheme.border, lineWidth: 0.75) }
-                        }
-                        .buttonStyle(.plain).accessibilityLabel(L10n.text("settings.title"))
-                        .padding(.top, 8).padding(.trailing, 14)
-                    }
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            if model.snapshot == nil {
+                Button { showingSettings = true } label: {
+                    Image(systemName: "ellipsis").font(.system(size: 19, weight: .semibold))
+                        .frame(width: 44, height: 44)
+                        .background(WeatherTheme.card, in: Circle())
+                        .overlay { Circle().strokeBorder(WeatherTheme.border, lineWidth: 0.75) }
+                }
+                .buttonStyle(.plain).accessibilityLabel(L10n.text("settings.title"))
+                .padding(.top, 8).padding(.trailing, 14)
             }
         }
         .foregroundStyle(.white)
