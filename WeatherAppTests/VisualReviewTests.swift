@@ -1,3 +1,4 @@
+import CoreLocation
 import SwiftUI
 import UIKit
 import XCTest
@@ -23,6 +24,22 @@ final class VisualReviewTests: XCTestCase {
         try await attach(WeatherDashboard(snapshot: snapshot, unit: .fahrenheit, now: PreviewWeather.date)
             .environment(\.dynamicTypeSize, .accessibility3)
             .frame(width: 375, height: 812), size: CGSize(width: 375, height: 812), name: "app-accessibility")
+    }
+
+    func testDiagnosticsRemainAccessibleWithoutForecast() async throws {
+        let model = WeatherViewModel()
+        let report = model.automaticDiagnostics
+        report.begin(mode: "Offline visual fixture", authorization: .authorizedWhenInUse)
+        report.received(CLLocation(latitude: 10, longitude: 20))
+        report.receive(WeatherRequestEvent(query: "current", status: "ERROR", error: DiagnosticError(
+            NSError(domain: "TestWeatherKitDomain", code: 42,
+                    userInfo: [NSLocalizedDescriptionKey: "Offline fixture — not a device diagnosis"])) ))
+        try await attach(WeatherHomeView(model: model).frame(width: 390, height: 844),
+                         size: CGSize(width: 390, height: 844), name: "empty-state-menu")
+        try await attach(NavigationStack { DiagnosticView(model: model) }
+            .environment(\.locale, Locale(identifier: "pt_BR"))
+            .preferredColorScheme(.dark).frame(width: 390, height: 844),
+            size: CGSize(width: 390, height: 844), name: "diagnostics")
     }
 
     private func attach<V: View>(_ view: V, size: CGSize, name: String) async throws {

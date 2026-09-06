@@ -34,6 +34,12 @@ struct SettingsView: View {
                     }
                 }.listRowBackground(WeatherTheme.card)
 
+                Section {
+                    NavigationLink(L10n.text("diagnostics.title")) {
+                        DiagnosticView(model: model)
+                    }
+                }.listRowBackground(WeatherTheme.card)
+
                 Section(L10n.text("settings.about")) {
                     LabeledContent(L10n.text("app.name"), value: version)
                     Text(L10n.text("app.about")).font(.footnote).foregroundStyle(WeatherTheme.secondary)

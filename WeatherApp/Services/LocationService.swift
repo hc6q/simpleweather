@@ -1,7 +1,20 @@
 import CoreLocation
 import Foundation
 
-enum LocationFailure: Error { case permissionDenied, unavailable, timedOut, alreadyRequesting }
+enum LocationFailure: Int, CustomNSError, LocalizedError {
+    case permissionDenied = 1, unavailable, timedOut, alreadyRequesting
+    static var errorDomain: String { "SimpleWeather.CoreLocation" }
+    var errorCode: Int { rawValue }
+    var errorDescription: String? {
+        switch self {
+        case .permissionDenied: return "Location permission is denied or restricted."
+        case .unavailable: return "CoreLocation returned no valid, recent CLLocation."
+        case .timedOut: return "App CLLocation timeout after 15 seconds."
+        case .alreadyRequesting: return "An app CLLocation request is already in progress."
+        }
+    }
+    var errorUserInfo: [String: Any] { [NSLocalizedDescriptionKey: errorDescription ?? ""] }
+}
 
 @MainActor
 final class LocationService: NSObject, CLLocationManagerDelegate {
@@ -88,9 +101,8 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
     }
 
     nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        let denied = (error as? CLError)?.code == .denied
         Task { @MainActor [weak self] in
-            self?.finish(.failure(denied ? LocationFailure.permissionDenied : LocationFailure.unavailable))
+            self?.finish(.failure(error))
         }
     }
 

@@ -5,12 +5,13 @@ import WeatherKit
 enum WeatherRequestError: Error { case invalidData, timedOut }
 
 struct WeatherClient: Sendable {
-    func fetch(for place: WeatherPlace) async throws -> WeatherSnapshot {
+    func fetch(for place: WeatherPlace, trace: WeatherDiagnosticSink? = nil) async throws -> WeatherSnapshot {
         guard place.coordinates.isValid else { throw WeatherRequestError.invalidData }
         return try await withTimeout(seconds: 22) {
             let location = CLLocation(latitude: place.coordinates.latitude, longitude: place.coordinates.longitude)
-            let (current, hourly, daily) = try await WeatherService.shared.weather(
-                for: location, including: .current, .hourly, .daily)
+            let (current, hourly, daily) = try await tracedWeatherRequest(query: "combined", sink: trace) {
+                try await WeatherService.shared.weather(for: location, including: .current, .hourly, .daily)
+            }
             let snapshot = WeatherSnapshot(
                 place: place,
                 current: CurrentWeatherModel(date: current.date,

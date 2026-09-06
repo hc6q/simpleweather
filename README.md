@@ -6,7 +6,22 @@ App iOS minimalista em preto OLED, com localização automática, previsão atua
 
 ## Validação
 
-O [GitHub Actions](https://github.com/hc6q/simpleweather/actions/workflows/ios-build.yml) compila o app e os widgets em Debug e Release e executa 14 testes offline. O status acima acompanha a branch `main`; cada execução mantém os logs, os resultados dos testes e as imagens das interfaces.
+O [GitHub Actions](https://github.com/hc6q/simpleweather/actions/workflows/ios-build.yml) compila o app e os widgets em Debug e Release e executa 24 testes offline. O status acima acompanha a branch `main`; cada execução mantém os logs, os resultados dos testes e as imagens das interfaces.
+
+## Diagnóstico temporário no iPhone
+
+Esta versão inclui **••• → Diagnóstico**, também acessível quando a previsão não carrega. A tela normal mantém a mensagem amigável; o relatório registra separadamente autorização, CLLocation e coordenadas, reverse geocoding, início/resultado de cada consulta WeatherKit e eventuais erros do pipeline do app.
+
+1. Instale o IPA sem assinatura após assiná-lo no Feather.
+2. Abra **••• → Diagnóstico** para ver a última tentativa automática.
+3. Toque em **Executar teste isolado**. Ele obtém uma nova CLLocation, registra o reverse geocoding e chama apenas `.current`. Se `.current` funcionar, testa `.hourly` e `.daily` em chamadas separadas. Uma falha em `.hourly` não impede o teste de `.daily`.
+4. Aguarde o resultado e toque em **Copiar diagnóstico**. O texto inclui Bundle Identifier, Domain, Code, localizedDescription, userInfo e a cadeia NSUnderlyingErrorKey de cada erro.
+
+O teste isolado não usa o timeout agregado do app e não converte erros nativos do WeatherKit. Timeouts locais de localização/geocoding têm domínios `SimpleWeather.CoreLocation` / `SimpleWeather.Geocoding`, distintos dos erros devolvidos pela Apple. Se CoreLocation falhar, WeatherKit fica como `NOT RUN`. Se somente geocoding falhar, a previsão continua usando coordenadas válidas e o nome genérico de localização.
+
+O relatório isolado permanece em memória durante a sessão, separado das atualizações automáticas. Ele contém coordenadas: revise antes de compartilhar. Credenciais reconhecidas em userInfo/descrições são ocultadas; dados binários e objetos opacos não são despejados. Logger registra etapas e erros, trata descrições/userInfo/coordenadas como privados e percorre erros internos com proteção contra ciclos. Não há envio de diagnóstico nem fornecedor meteorológico alternativo.
+
+Os testes offline verificam preservação/redação de erros, sequência das consultas e separação das falhas. **Eles não identificam a causa no iPhone: a investigação permanece aberta até recebermos o Domain + Code reais do aparelho.**
 
 ## Build automático
 

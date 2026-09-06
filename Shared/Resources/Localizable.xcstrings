@@ -1139,6 +1139,142 @@
           }
         }
       }
+    },
+    "diagnostics.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diagnóstico"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diagnostics"
+          }
+        }
+      }
+    },
+    "diagnostics.run": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Executar teste isolado"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run isolated test"
+          }
+        }
+      }
+    },
+    "diagnostics.running": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teste em execução…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test running…"
+          }
+        }
+      }
+    },
+    "diagnostics.cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "diagnostics.copy": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar diagnóstico"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy diagnostics"
+          }
+        }
+      }
+    },
+    "diagnostics.copied": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diagnóstico copiado"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diagnostics copied"
+          }
+        }
+      }
+    },
+    "diagnostics.explanation": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra a última atualização automática. O teste isolado obtém uma nova localização e consulta .current primeiro. Se funcionar, consulta .hourly e .daily separadamente. O relatório isolado fica preservado nesta sessão."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shows the last automatic refresh. The isolated test obtains a fresh location and requests .current first. If successful, it requests .hourly and .daily separately. The isolated report is preserved for this session."
+          }
+        }
+      }
+    },
+    "diagnostics.privacy": {
+      "extractionState": "manual",
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O relatório inclui suas coordenadas. Ele fica apenas na memória do app até você copiá-lo. Credenciais identificadas são ocultadas; os logs do sistema tratam detalhes como privados."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The report includes your coordinates. It stays in app memory until you copy it. Recognized credentials are redacted; system logs treat details as private."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

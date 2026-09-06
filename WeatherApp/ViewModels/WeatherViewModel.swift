@@ -14,6 +14,13 @@ final class WeatherViewModel {
     private(set) var unit: TemperatureUnit
     private(set) var attribution: WeatherAttributionRecord?
     private(set) var message: String?
+    let automaticDiagnostics = WeatherDiagnosticReport()
+    let isolatedDiagnostics = WeatherDiagnosticReport()
+    private(set) var isDiagnosing = false
+
+    var diagnosticReport: WeatherDiagnosticReport {
+        isolatedDiagnostics.startedAt == nil ? automaticDiagnostics : isolatedDiagnostics
+    }
 
     @ObservationIgnored private let location = LocationService()
     @ObservationIgnored private let geocoding = GeocodingService()
@@ -31,6 +38,8 @@ final class WeatherViewModel {
         attribution = preferences.attribution
         location.authorizationDidChange = { [weak self] status in
             guard let self else { return }
+            self.automaticDiagnostics.updateAuthorization(status)
+            if self.isDiagnosing { self.isolatedDiagnostics.updateAuthorization(status) }
             self.preferences.widgetRefreshAllowed = status == .authorizedAlways || status == .authorizedWhenInUse
             if status == .denied || status == .restricted {
                 self.state = .permissionDenied
@@ -40,9 +49,11 @@ final class WeatherViewModel {
         }
     }
 
-    var isRefreshing: Bool { state == .loading }
+    var isRefreshing: Bool { state == .loading || isDiagnosing }
 
     func activate() async {
+        guard !isDiagnosing else { return }
+        automaticDiagnostics.updateAuthorization(location.authorization)
         if !didLoadCache {
             didLoadCache = true
             snapshot = await cache.load()
@@ -67,15 +78,21 @@ final class WeatherViewModel {
     }
 
     func refresh(forceLocation: Bool = false, forceWeather: Bool = true) async {
-        guard !refreshInFlight else { return }
+        guard !refreshInFlight, !isDiagnosing else { return }
         refreshInFlight = true
         defer { refreshInFlight = false }
         lastAttempt = .now
         state = .loading
         message = nil
+        let report = automaticDiagnostics
+        report.begin(mode: "Automatic refresh (.current + .hourly + .daily)", authorization: location.authorization)
         do {
-            let coordinate = try await location.request(force: forceLocation)
-            let place = await geocoding.resolve(coordinate, previous: preferences.lastLocation)
+            let coordinate = try await diagnosedLocation(force: forceLocation, report: report)
+            report.geocoding = DiagnosticStage(status: "RUNNING")
+            report.event("Geocoding: START")
+            let geocoded = await geocoding.resolve(coordinate, previous: preferences.lastLocation)
+            report.received(geocoded)
+            let place = geocoded.place
             try Task.checkCancellation()
             preferences.lastLocation = place
             preferences.widgetRefreshAllowed = location.isAuthorized
@@ -83,13 +100,17 @@ final class WeatherViewModel {
                CLLocation(latitude: snapshot.place.coordinates.latitude, longitude: snapshot.place.coordinates.longitude)
                 .distance(from: coordinate) < 2_000 {
                 state = .loaded
+                report.pipeline = DiagnosticStage(status: "CACHED", detail: "Fresh forecast reused; no WeatherKit request.")
                 return
             }
-            let fresh = try await client.fetch(for: place)
+            let fresh = try await client.fetch(for: place, trace: { event in
+                await report.receive(event)
+            })
             try Task.checkCancellation()
             // Permission can be revoked while an earlier request is still in flight.
             guard location.isAuthorized else { throw LocationFailure.permissionDenied }
             snapshot = fresh
+            report.pipeline = DiagnosticStage(status: "OK", detail: "Forecast displayed")
             state = fresh.isStale() ? .stale : .loaded
             if !(await cache.save(fresh)) {
                 message = L10n.text("cache.unavailable")
@@ -100,15 +121,68 @@ final class WeatherViewModel {
                 preferences.attribution = attribution
             }
         } catch is CancellationError {
+            report.pipeline = DiagnosticStage(status: "CANCELLED")
             state = snapshot == nil ? .idle : .stale
         } catch LocationFailure.permissionDenied {
+            report.pipeline = DiagnosticStage(status: "ERROR", detail: "CoreLocation permission denied")
             preferences.widgetRefreshAllowed = false
             state = .permissionDenied
             message = L10n.text("location.permission.message")
             reloadWidgets()
         } catch {
+            report.pipeline = DiagnosticStage(status: "ERROR", error: DiagnosticLog.failure("App refresh pipeline", error))
+            report.event("App refresh pipeline: ERROR (see separate stage errors)")
             state = snapshot == nil ? .error : .stale
             message = L10n.text("weather.error.message")
+        }
+    }
+
+    private func diagnosedLocation(force: Bool, report: WeatherDiagnosticReport) async throws -> CLLocation {
+        report.updateAuthorization(location.authorization)
+        report.location = DiagnosticStage(status: "RUNNING")
+        report.event("CLLocation: START")
+        do {
+            let coordinate = try await location.request(force: force)
+            report.updateAuthorization(location.authorization)
+            report.received(coordinate)
+            return coordinate
+        } catch {
+            report.updateAuthorization(location.authorization)
+            report.location = DiagnosticStage(status: error is CancellationError ? "CANCELLED" : "ERROR",
+                error: DiagnosticLog.failure("CoreLocation", error))
+            report.event("CoreLocation: \(report.location.status); WeatherKit NOT RUN")
+            throw error
+        }
+    }
+
+    func runDiagnostics() async {
+        guard !refreshInFlight, !isDiagnosing else { return }
+        isDiagnosing = true
+        lastAttempt = .now
+        let report = isolatedDiagnostics
+        report.begin(mode: "Isolated WeatherKit probes: .current, then .hourly, then .daily",
+                     authorization: location.authorization)
+        defer {
+            isDiagnosing = false
+            lastAttempt = .now
+            report.event("Diagnostic run finished")
+        }
+        do {
+            let coordinate = try await diagnosedLocation(force: true, report: report)
+            report.geocoding = DiagnosticStage(status: "RUNNING")
+            report.event("Geocoding: START (fresh reverse geocoding)")
+            let geocoded = await geocoding.resolve(coordinate, previous: preferences.lastLocation, force: true)
+            report.received(geocoded)
+            try Task.checkCancellation()
+            // A geocoding failure never prevents probing WeatherKit with the valid CLLocation.
+            await WeatherKitProbe.run(location: coordinate) { event in
+                await report.receive(event)
+            }
+            report.pipeline = DiagnosticStage(status: Task.isCancelled ? "CANCELLED" : "COMPLETED",
+                                              detail: "See the individual WeatherKit results")
+        } catch {
+            report.pipeline = DiagnosticStage(status: error is CancellationError ? "CANCELLED" : "ERROR",
+                                               error: DiagnosticError(error))
         }
     }
 
