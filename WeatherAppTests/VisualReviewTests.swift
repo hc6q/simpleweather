@@ -35,14 +35,16 @@ final class VisualReviewTests: XCTestCase {
             NSError(domain: "TestWeatherKitDomain", code: 42,
                     userInfo: [NSLocalizedDescriptionKey: "Offline fixture — not a device diagnosis"])) ))
         try await attach(WeatherHomeView(model: model).frame(width: 390, height: 844),
-                         size: CGSize(width: 390, height: 844), name: "empty-state-menu")
+                         size: CGSize(width: 390, height: 844), name: "empty-state-menu",
+                         visibilityRegion: CGRect(x: 332, y: 8, width: 44, height: 44))
         try await attach(NavigationStack { DiagnosticView(model: model) }
             .environment(\.locale, Locale(identifier: "pt_BR"))
             .preferredColorScheme(.dark).frame(width: 390, height: 844),
             size: CGSize(width: 390, height: 844), name: "diagnostics")
     }
 
-    private func attach<V: View>(_ view: V, size: CGSize, name: String) async throws {
+    private func attach<V: View>(_ view: V, size: CGSize, name: String,
+                                 visibilityRegion: CGRect? = nil) async throws {
         // ImageRenderer omits UIKit-backed scroll views. Host the actual view hierarchy instead.
         let controller = UIHostingController(rootView: view.ignoresSafeArea())
         let window = UIWindow(frame: CGRect(origin: .zero, size: size))
@@ -68,10 +70,17 @@ final class VisualReviewTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
         let cgImage = try XCTUnwrap(image.cgImage)
+        // The intentionally sparse empty screen is tested in the menu's actual hit area.
+        // Full forecast and diagnostics screens still use the whole-image blank check.
+        let sample: CGImage
+        if let visibilityRegion {
+            sample = try XCTUnwrap(cgImage.cropping(to: visibilityRegion.applying(
+                CGAffineTransform(scaleX: image.scale, y: image.scale))))
+        } else { sample = cgImage }
         let context = try XCTUnwrap(CGContext(data: nil, width: 64, height: 64, bitsPerComponent: 8,
             bytesPerRow: 64 * 4, space: CGColorSpaceCreateDeviceRGB(),
             bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue))
-        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: 64, height: 64))
+        context.draw(sample, in: CGRect(x: 0, y: 0, width: 64, height: 64))
         let pixels = try XCTUnwrap(context.data).assumingMemoryBound(to: UInt8.self)
         let visible = (0..<(64 * 64)).filter {
             max(pixels[$0 * 4], pixels[$0 * 4 + 1], pixels[$0 * 4 + 2]) > 80
