@@ -114,7 +114,7 @@ jobs:
                   architectures = command("xcrun", "lipo", "-archs", binary).split()
                   require(architectures == ["arm64"],
                           f"Expected arm64, found {architectures}: {executable}")
-                  subprocess.run(["xcrun", "lipo", "-verify_arch", "arm64", binary], check=True)
+                  subprocess.run(["xcrun", "lipo", binary, "-verify_arch", "arm64"], check=True)
                   build_info = command("xcrun", "vtool", "-show-build", binary)
                   platforms = re.findall(r"^\s*platform\s+(\S+)", build_info, re.MULTILINE)
                   require(platforms == ["IOS"],
