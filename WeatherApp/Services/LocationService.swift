@@ -55,10 +55,15 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
         manager.requestLocation()
     }
 
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        authorizationDidChange?(manager.authorizationStatus)
+    nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        Task { @MainActor [weak self] in self?.handleAuthorization(status) }
+    }
+
+    private func handleAuthorization(_ status: CLAuthorizationStatus) {
+        authorizationDidChange?(status)
         guard continuation != nil else { return }
-        switch manager.authorizationStatus {
+        switch status {
         case .authorizedAlways, .authorizedWhenInUse: beginLocationRequest()
         case .denied, .restricted: finish(.failure(LocationFailure.permissionDenied))
         case .notDetermined: break
@@ -66,21 +71,27 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last(where: {
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last(where: {
             $0.horizontalAccuracy >= 0 && abs($0.timestamp.timeIntervalSinceNow) < 5 * 60 &&
             CLLocationCoordinate2DIsValid($0.coordinate)
-        }) else {
-            finish(.failure(LocationFailure.unavailable))
-            return
+        })
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            guard let location else {
+                self.finish(.failure(LocationFailure.unavailable))
+                return
+            }
+            self.lastLocation = location
+            self.finish(.success(location))
         }
-        lastLocation = location
-        finish(.success(location))
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         let denied = (error as? CLError)?.code == .denied
-        finish(.failure(denied ? LocationFailure.permissionDenied : LocationFailure.unavailable))
+        Task { @MainActor [weak self] in
+            self?.finish(.failure(denied ? LocationFailure.permissionDenied : LocationFailure.unavailable))
+        }
     }
 
     private func finish(_ result: Result<CLLocation, Error>) {
